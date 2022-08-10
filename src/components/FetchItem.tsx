@@ -22,6 +22,7 @@ export function FetchItem() {
     <div>
       <form>
         <div>
+          <h2>Product Search</h2>
           <span>Product ID: </span>
           <input
             type="text"

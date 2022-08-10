@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
-export function AddItem() {
+export function AddItem(props) {
+  const { fetchItems } = props
   const [itemName, setItemName] = useState('')
   const [itemValue, setItemValue] = useState<number>(0)
 
@@ -19,21 +20,16 @@ export function AddItem() {
       value: itemValue
     }
 
-    console.log('debug => ', item)
+    // manda request POST
+    await fetch('http://localhost:3333/items', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(item)
+    })
 
-    try {
-      // manda request POST
-      await fetch('http://localhost:3333/items', {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        method: 'POST',
-        body: JSON.stringify(item)
-      })
-    } catch (error) {
-      console.log('deu ruim! ', error)
-      alert(error.message)
-    }
+    fetchItems()
   }
 
   return (

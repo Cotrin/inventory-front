@@ -1,16 +1,18 @@
-import { GitHubRepos } from './components/GitHubRepos'
-import { FetchItem } from './components/FetchItem'
-import { ListItems } from './components/ListItems'
-import { AddItem } from './components/AddItem'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+import { UpdateItem } from './components/UpdateItem'
+import { ItemsCrud } from './layout/ItemsCrud'
 
 function App() {
   return (
-    <>
-      <ListItems/>
-      <FetchItem />
-      <AddItem/>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<ItemsCrud />} />
+        <Route path="edit/:id" element={<UpdateItem />} />
+      </Routes>
+
       {/* <GitHubRepos /> */}
-    </>
+    </BrowserRouter>
   )
 }
 

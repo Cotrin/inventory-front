@@ -1,24 +1,7 @@
-import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
-export function ListItems() {
-  const [items, setItems] = useState([])
-
-  async function fetchItems() {
-    const items = await fetch('http://localhost:3333').then(res => res.json())
-
-    setItems(items)
-  }
-
-  async function deleteItem(id) {
-    await fetch(`http://localhost:3333/items/${id}`, { method: 'delete' })
-
-    fetchItems()
-  }
-
-  //to not create an infinite loop of requests
-  useEffect(() => {
-    fetchItems()
-  }, [])
+export function ListItems(props) {
+  const { items, deleteItem } = props
 
   return (
     <div>
@@ -47,7 +30,12 @@ function RenderItemsList(props) {
           <tr key={item.id}>
             <td>{item.id}</td>
             <td>{item.name}</td>
-            <td onClick={() => deleteItem(item.id)}>✖</td>
+            <td>
+              <Link to={`/edit/${item.id}`}>Edit</Link>
+            </td>
+            <td>
+              <button onClick={() => deleteItem(item.id)}>✖</button>
+            </td>
           </tr>
         ))}
       </tbody>

@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 # Manual additions
-./src/GitHubRepos.tsx
+src/components/GitHubRepos.tsx
